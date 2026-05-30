@@ -1,0 +1,38 @@
+Cấu trúc gợi ý — Bài tập đấu giá (Java / Maven)
+================================================
+Package Java = đường dẫn thư mục sau: src/main/java/com/auction/
+
+src/main/java/com/auction/
+├── Main.java                    (demo console — có thể giữ hoặc bỏ sau)
+├── client/                      PHÍA CLIENT (JavaFX)
+│   ├── AuctionFxApp.java        (đang ở đây — sau có thể chỉ còn App + bootstrap)
+│   ├── DemoAuctionController.java
+│   ├── controller/              → các FXML Controller (package com.auction.client.controller)
+│   ├── service/                 → gửi/nhận socket/HTTP, không chứa logic đấu giá nặng
+│   └── viewmodel/               → state cho UI (tuỳ nhóm)
+├── server/                      PHÍA SERVER
+│   ├── network/                 → ServerSocket, mỗi client một luồng / pool
+│   ├── controller/              → đọc JSON → gọi đúng service
+│   ├── service/                 → nghiệp vụ: bid, đóng phiên, dùng AuctionSession, ...
+│   ├── dao/                     → JDBC, chỉ server gọi
+│   └── util/                    → tiện ích riêng server
+├── common/                      DÙNG CHUNG (client + server)
+│   ├── models/                  → User, Item, ... (đã có code)
+│   ├── dto/                     → object truyền qua JSON (BidMessage, ...)
+│   ├── util/                    → Gson/Jackson helper, thời gian, ...
+│   ├── exception/               → InvalidBidException, ...
+│   └── pattern/                 → Factory, Observer impl, ... (tuỳ)
+└── domain/                      Nghiệp vụ “phiên đấu” (đã có AuctionSession, ...)
+
+src/main/resources/
+├── fxml/                        màn hình JavaFX
+├── css/                         giao diện
+└── config/                      application.properties (port, JDBC, ...)
+
+src/test/java/com/auction/       JUnit — test domain / service / parser JSON
+
+Thư mục chỉ có file .gitkeep = giữ chỗ cho Git; khi thêm .java thì có thể xóa .gitkeep.
+
+Luồng gọi típ:
+  Client: FXML → client.controller → client.service (mạng) → server
+  Server: network → server.controller → server.service → domain (+ dao nếu có DB)

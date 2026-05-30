@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.auction.client.controller.MainAuctionController"
+    prefWidth="1280" prefHeight="800">
+
+    <BorderPane stylesheets="@../styles/app.css" styleClass="page-bg">
+
+        <!-- LEFT SIDEBAR -->
+        <left>
+            <VBox styleClass="sidebar" spacing="24" prefWidth="240">
+                <VBox styleClass="sidebar-brand-container" spacing="4">
+                    <Label text="bidding" styleClass="sidebar-brand-text" />
+                    <Label text="Enterprise Tier" styleClass="sidebar-brand-sub" />
+                </VBox>
+
+                <VBox spacing="8" VBox.vgrow="ALWAYS">
+                    <Button text="Dashboard" onAction="#handleDashboard"
+                        fx:id="btnDashboard"
+                        styleClass="sidebar-nav-item, active" />
+                    <Button text="Active Auctions" onAction="#handleActiveAuctions"
+                        fx:id="btnActiveAuctions"
+                        styleClass="sidebar-nav-item" />
+                    <Button fx:id="btnSellerCenter" text="Seller Center"
+                        onAction="#handleMyProducts"
+                        styleClass="sidebar-nav-item" />
+
+                    <Region VBox.vgrow="ALWAYS" />
+                    <Button fx:id="btnBanUser" text="🔨 Ban/Unban User"
+                            onAction="#handleBanUser"
+                            styleClass="sidebar-nav-item"/>
+                    <Button fx:id="btnActivityLog" text="📋 Activity Log"
+                            onAction="#handleActivityLog"
+                            styleClass="sidebar-nav-item"/>
+                </VBox>
+            </VBox>
+        </left>
+
+        <!-- TOP BAR (Header) -->
+        <top>
+            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="main-header">
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label fx:id="lblWelcome" text="Xin chào, User" styleClass="header-user" />
+                    <StackPane alignment="TOP_RIGHT">
+                        <Button text="🔔" onAction="#handleToggleNotification"
+                            style="-fx-background-color: transparent; -fx-font-size: 20px;
+                   -fx-cursor: hand; -fx-padding: 4 8 4 8;" />
+                        <Label fx:id="lblBadge" text="0"
+                            style="-fx-background-color: #ef4444; -fx-text-fill: white;
+                  -fx-font-size: 9px; -fx-font-weight: bold;
+                  -fx-background-radius: 8; -fx-padding: 1 4 1 4;
+                  -fx-min-width: 16; -fx-alignment: center;"
+                            StackPane.alignment="TOP_RIGHT"
+                            visible="false" />
+                    </StackPane>
+                    <Button text="👤 Hồ sơ" onAction="#handleProfile"
+                        style="-fx-background-color: #1e3a5f; -fx-text-fill: white;
+                            -fx-font-weight: bold; -fx-background-radius: 8;
+                            -fx-padding: 8 16 8 16; -fx-cursor: hand;" />
+                    <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger-logout" />
+                </HBox>
+            </HBox>
+        </top>
+
+        <!-- CENTER CONTENT -->
+        <center>
+            <VBox spacing="20" styleClass="main-content">
+                <!-- 3 Stat Cards -->
+                <HBox spacing="16">
+                    <!-- Card 1: Live Tracking -->
+                    <VBox styleClass="live-card" HBox.hgrow="ALWAYS" prefHeight="130" spacing="10">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="((•)) Live Tracking" styleClass="card-icon, live-icon"
+                                style="-fx-font-weight: bold;" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="• ACTIVE NOW" styleClass="badge-active" />
+                        </HBox>
+                        <Label text="Phiên đang mở" styleClass="stat-title" />
+                        <HBox alignment="BASELINE_LEFT" spacing="8">
+                            <Label fx:id="lblLiveCount" text="0" styleClass="stat-number" />
+                            <Label text="+2 active" styleClass="stat-number-sub" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <!-- Mini Chart bars layout -->
+                            <HBox alignment="BOTTOM_RIGHT" spacing="3" styleClass="mini-chart">
+                                <Region styleClass="bar, h-low" />
+                                <Region styleClass="bar, h-med" />
+                                <Region styleClass="bar, h-high" />
+                                <Region styleClass="bar, h-med" />
+                            </HBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Card 2: Socket Push -->
+                    <VBox styleClass="socket-card" HBox.hgrow="ALWAYS" prefHeight="130" spacing="10">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="⇄ Socket Push" styleClass="card-icon, socket-icon"
+                                style="-fx-font-weight: bold;" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="✓ Connected" styleClass="badge-connected" />
+                        </HBox>
+                        <Label text="Tính năng realtime" styleClass="stat-title" />
+                        <Label text="Giá đồng bộ tới client" styleClass="stat-desc-new" />
+                    </VBox>
+
+                    <!-- Card 3: Hệ thống -->
+                    <VBox styleClass="system-card" HBox.hgrow="ALWAYS" prefHeight="130" spacing="10">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="🛡 Hệ thống" styleClass="card-icon, system-icon"
+                                style="-fx-font-weight: bold;" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="99.9% Uptime" styleClass="badge-uptime" />
+                        </HBox>
+                        <Label text="Trạng thái dịch vụ" styleClass="stat-title" />
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="uptime-history-row">
+                            <Label text="24H HISTORY" styleClass="uptime-label" />
+                            <HBox spacing="3" alignment="CENTER_LEFT" styleClass="uptime-dots">
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                                <Region styleClass="uptime-dot" />
+                            </HBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="STABLE" styleClass="uptime-status" />
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Table Header Area with Title & Search -->
+                <HBox alignment="CENTER_LEFT" styleClass="table-header-bar">
+                    <Label text="Danh sách các phiên đấu giá" styleClass="section-title-new" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <!-- Search Box -->
+                    <HBox alignment="CENTER_LEFT" styleClass="search-box-container">
+                        <Label text="🔍" styleClass="search-icon" />
+                        <TextField fx:id="txtSearch" promptText="Tìm kiếm phiên..."
+                            styleClass="search-input" />
+                    </HBox>
+                </HBox>
+
+                <!-- TableView -->
+                <TableView fx:id="auctionTable" VBox.vgrow="ALWAYS" styleClass="auction-table-new">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn fx:id="colStt" text="STT" prefWidth="60" sortable="false"
+                            styleClass="col-stt" />
+                        <TableColumn fx:id="colAuctionId" text="PHIÊN" prefWidth="130" />
+                        <TableColumn fx:id="colItemName" text="VẬT PHẨM" prefWidth="250" />
+                        <TableColumn fx:id="colCurrentPrice" text="GIÁ HIỆN TẠI (VNĐ)"
+                            prefWidth="180" styleClass="col-price" />
+                        <TableColumn fx:id="colParticipants" text="SỐ NGƯỜI THAM GIA"
+                            prefWidth="150" />
+                        <TableColumn fx:id="colStatus" text="TRẠNG THÁI" prefWidth="140"
+                            styleClass="col-status" />
+                        <TableColumn fx:id="colTimeRemaining" text="HẠN THỜI GIAN" prefWidth="140" />
+                    </columns>
+                    <placeholder>
+                        <Label text="Không tìm thấy phiên đấu giá nào." styleClass="empty-hint" />
+                    </placeholder>
+                </TableView>
+
+                <!-- Pagination Footer Area -->
+                <HBox alignment="CENTER_LEFT" styleClass="table-pagination-bar">
+                    <Label fx:id="lblPaginationInfo" text="Hiển thị 0 trên 0 phiên đang diễn ra"
+                        styleClass="pagination-text" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <HBox spacing="5" alignment="CENTER" styleClass="pagination-controls">
+                        <Button text="&lt;" styleClass="btn-page, btn-page-nav" />
+                        <Button text="1" styleClass="btn-page, btn-page-active" />
+                        <Button text="2" styleClass="btn-page" />
+                        <Button text="3" styleClass="btn-page" />
+                        <Button text="&gt;" styleClass="btn-page, btn-page-nav" />
+                    </HBox>
+                </HBox>
+            </VBox>
+        </center>
+
+        <!-- BOTTOM FOOTER -->
+        <bottom>
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="main-footer-new">
+                <!-- Left aligned primary actions -->
+                <Button text="Tham gia đấu giá" onAction="#handleJoinAuction"
+                    styleClass="btn-join-auction">
+                    <graphic>
+                        <Label text="➔" styleClass="btn-icon" style="-fx-text-fill: white;" />
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnCreateAuction" text="Tạo phiên đấu giá mới"
+                    onAction="#handleCreateAuction" styleClass="btn-create-auction">
+                    <graphic>
+                        <Label text="⊕" styleClass="btn-icon" style="-fx-text-fill: white;" />
+                    </graphic>
+                </Button>
+
+                <Button fx:id="btnMyProducts" text="📦 Quản lý sản phẩm"
+                    onAction="#handleMyProducts"
+                    style="-fx-background-color: #7c3aed; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 8;
+                           -fx-padding: 10 20 10 20; -fx-cursor: hand;" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- Right aligned secondary refresh button -->
+                <Button fx:id="btnRefresh" text="Làm mới" onAction="#handleRefresh"
+                    styleClass="btn-refresh-new">
+                    <graphic>
+                        <Label text="⟳" styleClass="btn-icon" />
+                    </graphic>
+                </Button>
+            </HBox>
+        </bottom>
+    </BorderPane>
+    <!-- Notification Popup Overlay -->
+    <VBox fx:id="notificationPopup" visible="false" managed="false"
+        StackPane.alignment="TOP_RIGHT"
+        style="-fx-background-color: #0f1b35; -fx-border-color: #1e3a5f;
+                 -fx-border-width: 1; -fx-border-radius: 12; -fx-background-radius: 12;
+                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 16, 0, 0, 4);"
+        maxWidth="360" maxHeight="500"
+        translateX="-16" translateY="60">
+        <fx:include source="Notifications.fxml" fx:id="notificationPanel" />
+    </VBox>
+
+</StackPane>

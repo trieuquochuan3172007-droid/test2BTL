@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox alignment="CENTER" spacing="50.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.auction.client.controller.LoginController" prefWidth="1200" prefHeight="700"
+    stylesheets="@../styles/app.css" styleClass="login-page-new">
+
+    <HBox alignment="CENTER" spacing="120.0" VBox.vgrow="ALWAYS">
+        <!-- Left Side: Branding -->
+        <VBox alignment="CENTER_LEFT" spacing="12.0" prefWidth="480.0">
+            <HBox alignment="CENTER_LEFT" spacing="16.0">
+                <SVGPath content="M 0 10 L 10 0 L 20 10 L 10 20 Z M 5 15 L 15 5 M 5 5 L 15 15"
+                    fill="transparent" stroke="#38bdf8" strokeWidth="3" scaleX="1.5" scaleY="1.5" />
+                <Label text="AuctionPro" styleClass="brand-title-new" />
+            </HBox>
+            <Label text="SÀN ĐẤU GIÁ CÔNG NGHỆ CAO" styleClass="brand-subtitle" />
+
+            <Region prefHeight="50.0" />
+
+            <Label text="Đăng nhập tài khoản" styleClass="welcome-title" />
+            <Label text="Chào mừng bạn trở lại với hệ thống đấu giá." styleClass="welcome-subtitle" />
+        </VBox>
+
+        <!-- Right Side: Login Form -->
+        <VBox spacing="28.0" styleClass="login-form-container-new" alignment="CENTER_LEFT"
+            prefWidth="500.0">
+
+            <!-- Username -->
+            <VBox spacing="12.0">
+                <Label text="Tên đăng nhập / Số điện thoại" styleClass="field-label-new" />
+                <HBox styleClass="input-container" alignment="CENTER_LEFT" spacing="16.0">
+                    <SVGPath
+                        content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                        fill="#94a3b8" scaleX="1.2" scaleY="1.2" />
+                    <TextField fx:id="txtUsername" promptText="Nhập ID hoặc SĐT của bạn"
+                        styleClass="text-input-new" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+
+            <!-- Password -->
+            <VBox spacing="12.0">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Mật khẩu" styleClass="field-label-new" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Hyperlink text="Quên mật khẩu?" onAction="#handleForgotPassword"
+                        styleClass="forgot-link" />
+                </HBox>
+                <HBox styleClass="input-container" alignment="CENTER_LEFT" spacing="16.0">
+                    <SVGPath
+                        content="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"
+                        fill="#94a3b8" scaleX="1.2" scaleY="1.2" />
+                    <PasswordField fx:id="txtPassword" promptText="Nhập mật khẩu của bạn"
+                        styleClass="text-input-new" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="txtPasswordVisible" promptText="Nhập mật khẩu của bạn"
+                        styleClass="text-input-new" HBox.hgrow="ALWAYS" visible="false"
+                        managed="false" />
+                    <SVGPath fx:id="eyeIcon" onMouseClicked="#handleTogglePassword"
+                        content="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                        fill="#94a3b8" styleClass="eye-icon"
+                        scaleX="1.2" scaleY="1.2" style="-fx-cursor: hand;" />
+                    <SVGPath fx:id="eyeIcon" onMouseClicked="#handleTogglePassword"
+                        content="M12 4.5C7 4.5..." fill="#94a3b8" styleClass="eye-icon"
+                        scaleX="1.2" scaleY="1.2" style="-fx-cursor: hand;" />
+                </HBox>
+            </VBox>
+            <Label fx:id="lblMessage" wrapText="true" styleClass="error-label" />
+
+            <Region prefHeight="10.0" />
+
+            <Button text="Đăng nhập ➔" onAction="#handleLogin" maxWidth="1.7976931348623157E308"
+                styleClass="btn-login-new" />
+        </VBox>
+    </HBox>
+
+    <!-- Footer Link -->
+    <HBox alignment="CENTER" spacing="6.0">
+        <padding>
+            <Insets bottom="40.0" />
+        </padding>
+        <Label text="Chưa có tài khoản?" styleClass="field-label-new" />
+        <Hyperlink text="Đăng ký ngay" onAction="#goToRegister" styleClass="link-register" />
+    </HBox>
+</VBox>

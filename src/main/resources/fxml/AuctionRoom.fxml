@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auction.client.controller.AuctionRoomController" prefWidth="1200" prefHeight="800" stylesheets="@../styles/app.css" styleClass="page-bg">
+    
+    <!-- HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="auction-room-header">
+            <Button text="← Trở lại" onAction="#handleBack" styleClass="btn-secondary" />
+            <Label text="PHÒNG ĐẤU GIÁ TRỰC TIẾP" styleClass="header-title" />
+        </HBox>
+    </top>
+
+    <!-- CENTER (Main Content) -->
+    <center>
+        <HBox spacing="20" style="-fx-padding: 20px;">
+            
+            <!-- Cột trái: Thông tin sản phẩm & Đồng hồ -->
+            <VBox spacing="18" prefWidth="360" styleClass="status-card">
+                <Label fx:id="lblItemName" text="Tên Sản Phẩm" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3b82f6; -fx-wrap-text: true;" />
+                
+                <Label text="Thông tin chi tiết:" styleClass="field-label" />
+                <Label fx:id="lblDescription" text="Mô tả..." wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #94a3b8;" />
+                
+                <Separator />
+                
+                <!-- Khu vực đếm ngược -->
+                <VBox alignment="CENTER" spacing="8" styleClass="timer-card">
+                    <Label text="THỜI GIAN CÒN LẠI" style="-fx-font-weight: bold; -fx-text-fill: #94a3b8;" />
+                    <Label fx:id="lblTimer" text="00:00:00" style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #60a5fa;" />
+                </VBox>
+                
+                <!-- Khu vực người dẫn đầu -->
+                <VBox alignment="CENTER" spacing="8" styleClass="winner-card">
+                    <Label fx:id="lblWinnerTitle" text="NGƯỜI DẪN ĐẦU HIỆN TẠI" style="-fx-font-weight: bold; -fx-text-fill: #34d399;" />
+                    <Label fx:id="lblWinner" text="Chưa có" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #10b981;" />
+                </VBox>
+            </VBox>
+
+            <!-- Cột phải: Biểu đồ và Form đặt giá -->
+            <VBox spacing="20" HBox.hgrow="ALWAYS">
+                <!-- Vùng hiển thị giá cao nhất -->
+                <VBox alignment="CENTER" styleClass="status-card">
+                    <Label text="GIÁ CAO NHẤT HIỆN TẠI" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;" />
+                    <Label fx:id="lblCurrentPrice" text="0 VNĐ" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #f59e0b;" />
+                </VBox>
+
+                <!-- Biểu đồ lịch sử giá (Yêu cầu nâng cao) -->
+                <VBox spacing="14" styleClass="chart-panel" VBox.vgrow="ALWAYS">
+                    <Label text="Biểu đồ giá thời gian thực" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                    <LineChart fx:id="bidChart" title="" VBox.vgrow="ALWAYS" animated="false" style="-fx-background-color: transparent;">
+                        <xAxis>
+                            <CategoryAxis label="Thời gian" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Giá (VNĐ)" />
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+
+                <!-- Form đặt giá -->
+                <HBox spacing="12" alignment="CENTER" styleClass="auction-room-actions">
+                    <Label text="Nhập giá mới:" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                    <TextField fx:id="txtBidAmount" promptText="Giá phải cao hơn giá hiện tại" prefWidth="280" prefHeight="42" styleClass="text-input" />
+                    <Button text="ĐẶT GIÁ NGAY" onAction="#handlePlaceBid" prefHeight="42" styleClass="btn-danger" />
+                </HBox>
+                
+                <!-- Form đặt giá tự động (Auto-bidding) -->
+                <HBox spacing="12" alignment="CENTER" styleClass="auction-room-actions">
+                    <Label text="Auto-bid (Tối đa):" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                    <TextField fx:id="txtAutoBidMax" promptText="Mức giá tối đa" prefWidth="200" prefHeight="42" styleClass="text-input" />
+                    <ToggleButton fx:id="toggleAutoBid" text="Bật Auto-bid" onAction="#handleToggleAutoBid" prefHeight="42" styleClass="btn-secondary" />
+                </HBox>
+            </VBox>
+            
+        </HBox>
+    </center>
+    
+</BorderPane>
