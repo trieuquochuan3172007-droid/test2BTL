@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auction.client.controller.RegisterController" prefWidth="620" prefHeight="620" stylesheets="@../styles/app.css" styleClass="page-bg">
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+    <children>
+        <VBox alignment="CENTER" spacing="8" prefWidth="480" styleClass="form-page">
+            <children>
+                <Label text="ĐĂNG KÝ TÀI KHOẢN" styleClass="form-title" />
+                <Label text="Vui lòng điền đầy đủ thông tin để bắt đầu đấu giá." styleClass="form-subtitle" wrapText="true" />
+
+                <VBox spacing="12" prefWidth="410">
+                    <Label text="Tên đăng nhập (*)" styleClass="field-label" />
+                    <TextField fx:id="txtUser" promptText="Nhập tên đăng nhập" prefHeight="42" styleClass="text-input" />
+                </VBox>
+
+                <VBox spacing="12" prefWidth="410">
+                    <Label text="Mật khẩu (*)" styleClass="field-label" />
+                    <PasswordField fx:id="txtPass" promptText="Nhập mật khẩu" prefHeight="42" styleClass="text-input" />
+                </VBox>
+
+                <VBox spacing="12" prefWidth="410">
+                    <Label text="Email (*)" styleClass="field-label" />
+                    <TextField fx:id="txtEmail" promptText="VD: user@gmail.com" prefHeight="42" styleClass="text-input" />
+                </VBox>
+
+                <VBox spacing="12" prefWidth="410">
+                    <Label text="Địa chỉ" styleClass="field-label" />
+                    <TextField fx:id="txtAddress" promptText="Nhập địa chỉ của bạn" prefHeight="42" styleClass="text-input" />
+                </VBox>
+
+                <VBox spacing="12" prefWidth="410">
+                    <Label text="Vai trò (*)" styleClass="field-label" />
+                    <ComboBox fx:id="cbRole" prefHeight="42" styleClass="combo-box" />
+                </VBox>
+
+                <Label fx:id="lblError" styleClass="error-label" wrapText="true" />
+
+                <Button text="Đăng ký ngay" onAction="#handleRegister" prefWidth="410" prefHeight="44" styleClass="btn-primary" />
+                <Hyperlink text="Đã có tài khoản? Quay lại đăng nhập" onAction="#handleLoginRedirect" styleClass="link-inline" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+    Notifications.fxml — Panel thông báo
+
+    Nhúng vào MainAuction.fxml / AdminDashboard.fxml bằng:
+        <fx:include source="Notifications.fxml" fx:id="notificationPanel"/>
+
+    Controller: com.auction.client.controller.NotificationController
+-->
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.auction.client.controller.NotificationController"
+      styleClass="notification-panel"
+      spacing="0"
+      prefWidth="340"
+      maxHeight="500">
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12" styleClass="notification-header">
+        <padding><Insets top="16" right="16" bottom="12" left="16"/></padding>
+        <Label text="🔔" style="-fx-font-size: 16px;"/>
+        <Label text="Thông báo" style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblUnreadCount" text="" style="-fx-text-fill: #6366f1; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+        <Button text="Đánh dấu đã đọc" onAction="#handleMarkAllRead"
+                style="-fx-background-color: transparent; -fx-text-fill: #6366f1;
+                       -fx-font-size: 11px; -fx-cursor: hand; -fx-border-color: #6366f1;
+                       -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 3 8 3 8;"/>
+    </HBox>
+
+    <!-- Danh sách notification -->
+    <ListView fx:id="listNotifications"
+              VBox.vgrow="ALWAYS"
+              style="-fx-background-color: transparent; -fx-border-color: transparent;
+                     -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+
+    <!-- Empty state (hiển thị khi list rỗng bằng placeholder) -->
+</VBox>

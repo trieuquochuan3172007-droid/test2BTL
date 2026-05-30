@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.auction.client.controller.SellerProductsController"
+            prefWidth="1100" prefHeight="720"
+            stylesheets="@../styles/app.css" styleClass="page-bg">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="main-header">
+            <Label fx:id="lblWelcome" text="Quản lý sản phẩm" styleClass="header-user"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🏷 Seller Center" style="-fx-text-fill: #94a3b8; -fx-font-size: 13px;"/>
+            <Button text="← Quay lại sàn" onAction="#handleBack" styleClass="btn-danger-logout"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox spacing="20" styleClass="main-content">
+
+            <!-- Stat bar -->
+            <HBox spacing="16">
+                <VBox styleClass="socket-card" HBox.hgrow="ALWAYS" prefHeight="90" spacing="8">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="📦 Sản phẩm của tôi" styleClass="card-icon"
+                               style="-fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="• SELLER" styleClass="badge-connected"/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT" spacing="8">
+                        <Label fx:id="lblTotal" text="0" styleClass="stat-number"/>
+                        <Label text="phiên đã tạo" styleClass="stat-number-sub"/>
+                    </HBox>
+                </VBox>
+
+                <VBox styleClass="live-card" HBox.hgrow="ALWAYS" prefHeight="90" spacing="8">
+                    <Label text="💡 Hướng dẫn" styleClass="card-icon" style="-fx-font-weight: bold;"/>
+                    <Label text="Có thể xóa phiên bất kỳ lúc nào. Chỉ được sửa tên sản phẩm khi phiên đấu giá chưa bắt đầu (chờ kích hoạt)."
+                           style="-fx-text-fill: #94a3b8; -fx-font-size: 12px; -fx-wrap-text: true;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Table section title -->
+            <HBox alignment="CENTER_LEFT" styleClass="table-header-bar">
+                <Label text="Danh sách phiên đấu giá của tôi" styleClass="section-title-new"/>
+            </HBox>
+
+            <!-- TableView -->
+            <TableView fx:id="productTable" VBox.vgrow="ALWAYS" styleClass="auction-table-new">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn fx:id="colStt"          text="STT"            prefWidth="60"  sortable="false"/>
+                    <TableColumn fx:id="colAuctionId"    text="MÃ PHIÊN"       prefWidth="160"/>
+                    <TableColumn fx:id="colItemName"     text="TÊN SẢN PHẨM"  prefWidth="260"/>
+                    <TableColumn fx:id="colCurrentPrice" text="GIÁ (VNĐ)"      prefWidth="160"/>
+                    <TableColumn fx:id="colStatus"       text="TRẠNG THÁI"     prefWidth="140"/>
+                    <TableColumn fx:id="colTimeRemaining" text="HẠN CÒN LẠI"  prefWidth="140"/>
+                </columns>
+                <placeholder>
+                    <Label text="Bạn chưa tạo phiên đấu giá nào." styleClass="empty-hint"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- BOTTOM ACTION BAR -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="main-footer-new">
+            <!-- Nút Sửa -->
+            <Button text="✏ Sửa tên sản phẩm" onAction="#handleEdit" styleClass="btn-create-auction">
+                <graphic>
+                    <Label text="" styleClass="btn-icon" style="-fx-text-fill: white;"/>
+                </graphic>
+            </Button>
+
+            <!-- Nút Xóa -->
+            <Button text="🗑 Xóa phiên" onAction="#handleDelete"
+                    style="-fx-background-color: #dc2626; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 8;
+                           -fx-padding: 10 20 10 20; -fx-cursor: hand;">
+            </Button>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Nút Làm mới -->
+            <Button text="⟳ Làm mới" onAction="#handleRefresh" styleClass="btn-refresh-new">
+                <graphic>
+                    <Label text="" styleClass="btn-icon"/>
+                </graphic>
+            </Button>
+        </HBox>
+    </bottom>
+
+</BorderPane>

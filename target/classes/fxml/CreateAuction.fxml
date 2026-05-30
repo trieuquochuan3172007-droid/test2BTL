@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.auction.client.controller.CreateAuctionController" prefWidth="700" prefHeight="650" stylesheets="@../styles/app.css" styleClass="page-bg">
+    <padding>
+        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+    </padding>
+
+    <VBox spacing="18" prefWidth="620" styleClass="form-page">
+        <children>
+            <Label text="TẠO PHIÊN ĐẤU GIÁ MỚI" styleClass="form-title" />
+            <Label text="Nhập đủ thông tin đấu giá để phiên hoạt động mượt mà." styleClass="form-subtitle" wrapText="true" />
+
+            <GridPane hgap="16" vgap="16" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="140" halignment="RIGHT" />
+                    <ColumnConstraints minWidth="360" />
+                </columnConstraints>
+
+                <Label text="Tên sản phẩm (*):" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label" />
+                <TextField fx:id="txtItemName" promptText="VD: Macbook Pro M3" prefHeight="42" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Danh mục:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label" />
+                <ComboBox fx:id="cbCategory" prefHeight="42" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Giá khởi điểm (*):" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label" />
+                <TextField fx:id="txtStartPrice" promptText="Nhập số tiền (VNĐ)" prefHeight="42" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Bắt đầu (*):" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="field-label" />
+                <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <DatePicker fx:id="dpStartDate" prefHeight="42" prefWidth="150" promptText="Chọn ngày" styleClass="date-picker" />
+                    <ComboBox fx:id="cbStartHour" prefHeight="42" prefWidth="70" styleClass="combo-box" />
+                    <Label text="h" style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="cbStartMinute" prefHeight="42" prefWidth="70" styleClass="combo-box" />
+                    <Label text="m" style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                </HBox>
+
+                <Label text="Kết thúc (*):" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="field-label" />
+                <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <DatePicker fx:id="dpEndDate" prefHeight="42" prefWidth="150" promptText="Chọn ngày" styleClass="date-picker" />
+                    <ComboBox fx:id="cbEndHour" prefHeight="42" prefWidth="70" styleClass="combo-box" />
+                    <Label text="h" style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="cbEndMinute" prefHeight="42" prefWidth="70" styleClass="combo-box" />
+                    <Label text="m" style="-fx-text-fill: #94a3b8; -fx-font-weight: bold;" />
+                </HBox>
+
+                <Label text="Mô tả chi tiết:" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="field-label" />
+                <TextField fx:id="txtDescription" promptText="Thông tin tình trạng sản phẩm..." prefHeight="42" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="16" style="-fx-padding: 10 0 0 0;">
+                <Button text="Hủy bỏ" onAction="#handleCancel" prefWidth="140" prefHeight="44" styleClass="btn-secondary" />
+                <Button text="Đăng Sản Phẩm" onAction="#handleCreate" prefWidth="190" prefHeight="44" styleClass="btn-success" />
+            </HBox>
+        </children>
+    </VBox>
+</VBox>
